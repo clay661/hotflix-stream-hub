@@ -35,7 +35,7 @@ function CommentsAdmin() {
   const refresh = () => qc.invalidateQueries({ queryKey: ["admin-comments"] });
   const set = async (id: string, s: "active" | "hidden" | "deleted") => {
     const { error } = await supabase.from("comments").update({ status: s }).eq("id", id);
-    if (error) return toast.error("Falha ao atualizar.");
+    if (error) { toast.error("Falha ao atualizar."); return; }
     refresh();
   };
   const purge = async (id: string) => {

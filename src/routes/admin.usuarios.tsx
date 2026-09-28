@@ -41,7 +41,7 @@ function UsersAdmin() {
 
   const setStatus = async (id: string, status: "active" | "suspended") => {
     const { error } = await supabase.from("profiles").update({ status }).eq("id", id);
-    if (error) return toast.error("Falha ao atualizar.");
+    if (error) { toast.error("Falha ao atualizar."); return; }
     toast.success(status === "suspended" ? "Usuário suspenso" : "Usuário reativado");
     refresh();
   };

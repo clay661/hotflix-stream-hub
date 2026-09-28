@@ -37,7 +37,7 @@ function AccountPage() {
 
   const save = async () => {
     const { error } = await supabase.from("profiles").update({ display_name: name }).eq("id", user.id);
-    if (error) return toast.error("Não foi possível salvar.");
+    if (error) { toast.error("Não foi possível salvar."); return; }
     toast.success("Perfil atualizado!");
     qc.invalidateQueries({ queryKey: ["profile", user.id] });
   };

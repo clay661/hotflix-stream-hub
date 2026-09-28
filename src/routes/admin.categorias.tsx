@@ -34,11 +34,11 @@ function CategoriesAdmin() {
   };
 
   const save = async () => {
-    if (!form.name) return toast.error("Informe o nome.");
+    if (!form.name) { toast.error("Informe o nome."); return; }
     const { error } = form.id
       ? await supabase.from("categories").update({ name: form.name, description: form.description ?? "" }).eq("id", form.id)
       : await supabase.from("categories").insert({ name: form.name, description: form.description ?? "", slug: slugify(form.name), position: (data?.cats.length ?? 0) + 1 });
-    if (error) return toast.error(error.message.includes("duplicate") ? "Já existe uma categoria com esse nome." : "Não foi possível salvar.");
+    if (error) { toast.error(error.message.includes("duplicate") ? "Já existe uma categoria com esse nome." : "Não foi possível salvar."); return; }
     toast.success("Categoria salva");
     setForm({});
     refresh();
@@ -46,7 +46,7 @@ function CategoriesAdmin() {
   const remove = async (c: C) => {
     if (!confirm(`Excluir a categoria "${c.name}"? Os vídeos ficarão sem categoria.`)) return;
     const { error } = await supabase.from("categories").delete().eq("id", c.id);
-    if (error) return toast.error("Não foi possível excluir.");
+    if (error) { toast.error("Não foi possível excluir."); return; }
     refresh();
   };
   const move = async (i: number, dir: -1 | 1) => {

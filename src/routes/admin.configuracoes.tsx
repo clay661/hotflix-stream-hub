@@ -27,21 +27,21 @@ function SettingsAdmin() {
 
   const grant = async () => {
     const { data: p } = await supabase.from("profiles").select("id").ilike("email", email.trim()).maybeSingle();
-    if (!p) return toast.error("Nenhuma conta cadastrada com esse e-mail.");
+    if (!p) { toast.error("Nenhuma conta cadastrada com esse e-mail."); return; }
     const { error } = await supabase.from("user_roles").insert({ user_id: p.id, role: "admin" });
-    if (error && !error.message.includes("duplicate")) return toast.error("Não foi possível conceder acesso.");
+    if (error && !error.message.includes("duplicate")) { toast.error("Não foi possível conceder acesso."); return; }
     toast.success("Administrador adicionado");
     setEmail("");
     qc.invalidateQueries({ queryKey: ["admin-list"] });
   };
   const revoke = async (id: string) => {
-    if (id === user.id) return toast.error("Você não pode remover seu próprio acesso.");
+    if (id === user.id) { toast.error("Você não pode remover seu próprio acesso."); return; }
     await supabase.from("user_roles").delete().eq("user_id", id).eq("role", "admin");
     qc.invalidateQueries({ queryKey: ["admin-list"] });
   };
   const changePassword = async () => {
     const { error } = await supabase.auth.updateUser({ password: pwd, current_password: cur } as { password: string });
-    if (error) return toast.error("Não foi possível alterar a senha. Confira a senha atual.");
+    if (error) { toast.error("Não foi possível alterar a senha. Confira a senha atual."); return; }
     toast.success("Senha alterada");
     setPwd(""); setCur("");
   };

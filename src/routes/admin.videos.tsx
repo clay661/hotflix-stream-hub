@@ -42,19 +42,19 @@ function VideosAdmin() {
 
   const togglePublish = async (v: V) => {
     const { error } = await supabase.from("videos").update({ published: !v.published }).eq("id", v.id);
-    if (error) return toast.error("Falha ao atualizar.");
+    if (error) { toast.error("Falha ao atualizar."); return; }
     toast.success(v.published ? "Vídeo despublicado" : "Vídeo publicado");
     refresh();
   };
   const remove = async (v: V) => {
     if (!confirm(`Excluir "${v.title}"? Esta ação não pode ser desfeita.`)) return;
     const { error } = await supabase.from("videos").delete().eq("id", v.id);
-    if (error) return toast.error("Falha ao excluir.");
+    if (error) { toast.error("Falha ao excluir."); return; }
     toast.success("Vídeo excluído");
     refresh();
   };
   const save = async () => {
-    if (!editing?.title) return toast.error("Informe o título.");
+    if (!editing?.title) { toast.error("Informe o título."); return; }
     const payload = {
       title: editing.title,
       description: editing.description ?? "",
@@ -68,7 +68,7 @@ function VideosAdmin() {
     const { error } = editing.id
       ? await supabase.from("videos").update(payload).eq("id", editing.id)
       : await supabase.from("videos").insert({ ...payload, slug: `${slugify(editing.title)}-${Date.now().toString(36)}` });
-    if (error) return toast.error("Não foi possível salvar.");
+    if (error) { toast.error("Não foi possível salvar."); return; }
     toast.success("Vídeo salvo");
     setEditing(null);
     refresh();

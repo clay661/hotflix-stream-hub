@@ -23,7 +23,7 @@ export function Panel({ title, children, className = "" }: { title?: string; chi
   );
 }
 
-export function Stat({ label, value, hint }: { label: string; value: ReactNode; hint?: string }) {
+export function Stat({ label, value, hint }: { label: string; value: ReactNode; hint?: string | undefined }) {
   return (
     <div className="rounded-2xl border border-border bg-card p-4">
       <p className="text-xs text-muted-foreground">{label}</p>

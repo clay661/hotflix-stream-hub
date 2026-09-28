@@ -30,13 +30,13 @@ function AdminLogin() {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
     if (error || !data.user) {
       setBusy(false);
-      return toast.error("E-mail ou senha incorretos.");
+      { toast.error("E-mail ou senha incorretos."); return; }
     }
     const { data: isAdmin } = await supabase.rpc("has_role", { _user_id: data.user.id, _role: "admin" });
     setBusy(false);
     if (!isAdmin) {
       await supabase.auth.signOut();
-      return toast.error("Esta conta não tem permissão de administrador.");
+      { toast.error("Esta conta não tem permissão de administrador."); return; }
     }
     nav({ to: "/admin" });
   };

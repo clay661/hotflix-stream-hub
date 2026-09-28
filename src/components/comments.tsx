@@ -98,7 +98,7 @@ function Composer({ onSubmit, placeholder, initial = "", onCancel }: { onSubmit:
   );
 }
 
-function CommentItem({ c, name, onChange, onReply }: { c: Row; name?: string; onChange: () => void; onReply?: (b: string) => Promise<boolean> }) {
+function CommentItem({ c, name, onChange, onReply }: { c: Row; name?: string | undefined; onChange: () => void; onReply?: (b: string) => Promise<boolean> }) {
   const { user } = useAuth();
   const [editing, setEditing] = useState(false);
   const [replying, setReplying] = useState(false);
@@ -115,7 +115,7 @@ function CommentItem({ c, name, onChange, onReply }: { c: Row; name?: string; on
   const remove = async () => {
     if (!confirm("Excluir este comentário?")) return;
     const { error } = await supabase.from("comments").update({ status: "deleted" }).eq("id", c.id);
-    if (error) return toast.error("Não foi possível excluir.");
+    if (error) { toast.error("Não foi possível excluir."); return; }
     onChange();
   };
 
