@@ -142,3 +142,28 @@
     color: var(--color-foreground);
   }
 }
+
+/* Hotflix dark premium theme */
+:root {
+  --radius: 0.9rem;
+  --background: oklch(0.14 0.005 20);
+  --foreground: oklch(0.97 0 0);
+  --card: oklch(0.19 0.006 20);
+  --card-foreground: oklch(0.97 0 0);
+  --popover: oklch(0.19 0.006 20);
+  --popover-foreground: oklch(0.97 0 0);
+  --primary: oklch(0.63 0.23 12);
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.24 0.008 20);
+  --secondary-foreground: oklch(0.97 0 0);
+  --muted: oklch(0.24 0.008 20);
+  --muted-foreground: oklch(0.7 0.01 20);
+  --accent: oklch(0.28 0.02 12);
+  --accent-foreground: oklch(0.97 0 0);
+  --border: oklch(0.28 0.008 20);
+  --input: oklch(0.28 0.008 20);
+  --ring: oklch(0.63 0.23 12);
+  --gradient-hero: linear-gradient(to top, var(--background) 5%, color-mix(in oklab, var(--background) 60%, transparent) 50%, transparent);
+}
+body { font-family: "Manrope", system-ui, sans-serif; }
+h1, h2, h3, .font-display { font-family: "Sora", system-ui, sans-serif; }

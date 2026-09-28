@@ -10,33 +10,128 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BuscaRouteImport } from './routes/busca'
+import { Route as CategoriasRouteImport } from './routes/categorias'
+import { Route as CriadoresRouteImport } from './routes/criadores'
+import { Route as VideosRouteImport } from './routes/videos'
+import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
+import { Route as CriadorSlugRouteImport } from './routes/criador.$slug'
+import { Route as VideoSlugRouteImport } from './routes/video.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuscaRoute = BuscaRouteImport.update({
+  id: '/busca',
+  path: '/busca',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriasRoute = CategoriasRouteImport.update({
+  id: '/categorias',
+  path: '/categorias',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriadoresRoute = CriadoresRouteImport.update({
+  id: '/criadores',
+  path: '/criadores',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideosRoute = VideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
+  id: '/categoria/$slug',
+  path: '/categoria/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CriadorSlugRoute = CriadorSlugRouteImport.update({
+  id: '/criador/$slug',
+  path: '/criador/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VideoSlugRoute = VideoSlugRouteImport.update({
+  id: '/video/$slug',
+  path: '/video/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/busca': typeof BuscaRoute
+  '/categorias': typeof CategoriasRoute
+  '/criadores': typeof CriadoresRoute
+  '/videos': typeof VideosRoute
+  '/categoria/$slug': typeof CategoriaSlugRoute
+  '/criador/$slug': typeof CriadorSlugRoute
+  '/video/$slug': typeof VideoSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/busca': typeof BuscaRoute
+  '/categorias': typeof CategoriasRoute
+  '/criadores': typeof CriadoresRoute
+  '/videos': typeof VideosRoute
+  '/categoria/$slug': typeof CategoriaSlugRoute
+  '/criador/$slug': typeof CriadorSlugRoute
+  '/video/$slug': typeof VideoSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/busca': typeof BuscaRoute
+  '/categorias': typeof CategoriasRoute
+  '/criadores': typeof CriadoresRoute
+  '/videos': typeof VideosRoute
+  '/categoria/$slug': typeof CategoriaSlugRoute
+  '/criador/$slug': typeof CriadorSlugRoute
+  '/video/$slug': typeof VideoSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/busca'
+    | '/categorias'
+    | '/criadores'
+    | '/videos'
+    | '/categoria/$slug'
+    | '/criador/$slug'
+    | '/video/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/busca'
+    | '/categorias'
+    | '/criadores'
+    | '/videos'
+    | '/categoria/$slug'
+    | '/criador/$slug'
+    | '/video/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/busca'
+    | '/categorias'
+    | '/criadores'
+    | '/videos'
+    | '/categoria/$slug'
+    | '/criador/$slug'
+    | '/video/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BuscaRoute: typeof BuscaRoute
+  CategoriasRoute: typeof CategoriasRoute
+  CriadoresRoute: typeof CriadoresRoute
+  VideosRoute: typeof VideosRoute
+  CategoriaSlugRoute: typeof CategoriaSlugRoute
+  CriadorSlugRoute: typeof CriadorSlugRoute
+  VideoSlugRoute: typeof VideoSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +143,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/busca': {
+      id: '/busca'
+      path: '/busca'
+      fullPath: '/busca'
+      preLoaderRoute: typeof BuscaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categorias': {
+      id: '/categorias'
+      path: '/categorias'
+      fullPath: '/categorias'
+      preLoaderRoute: typeof CategoriasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criadores': {
+      id: '/criadores'
+      path: '/criadores'
+      fullPath: '/criadores'
+      preLoaderRoute: typeof CriadoresRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/videos': {
+      id: '/videos'
+      path: '/videos'
+      fullPath: '/videos'
+      preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categoria/$slug': {
+      id: '/categoria/$slug'
+      path: '/categoria/$slug'
+      fullPath: '/categoria/$slug'
+      preLoaderRoute: typeof CategoriaSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/criador/$slug': {
+      id: '/criador/$slug'
+      path: '/criador/$slug'
+      fullPath: '/criador/$slug'
+      preLoaderRoute: typeof CriadorSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/video/$slug': {
+      id: '/video/$slug'
+      path: '/video/$slug'
+      fullPath: '/video/$slug'
+      preLoaderRoute: typeof VideoSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BuscaRoute: BuscaRoute,
+  CategoriasRoute: CategoriasRoute,
+  CriadoresRoute: CriadoresRoute,
+  VideosRoute: VideosRoute,
+  CategoriaSlugRoute: CategoriaSlugRoute,
+  CriadorSlugRoute: CriadorSlugRoute,
+  VideoSlugRoute: VideoSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
