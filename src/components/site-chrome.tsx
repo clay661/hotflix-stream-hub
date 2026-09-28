@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "@tanstack/react-router";
 import { Home, LayoutGrid, Flame, Search, Users } from "lucide-react";
 import { useState } from "react";
+import { useAuth } from "@/hooks/use-auth";
 
 export function Logo() {
   return (
@@ -42,7 +43,7 @@ export function SiteHeader() {
           </label>
         </form>
         <Link to="/busca" search={{ q: "" }} className="ml-auto sm:hidden" aria-label="Buscar"><Search className="h-5 w-5" /></Link>
-        <button className="shrink-0 rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-primary-foreground">Entrar</button>
+        <AccountButton />
       </div>
     </header>
   );
@@ -63,5 +64,28 @@ export function BottomNav() {
         </Link>
       ))}
     </nav>
+  );
+}
+
+function AccountButton() {
+  const { user, isAdmin, loading } = useAuth();
+  if (loading) return <span className="h-8 w-16 shrink-0" />;
+  if (!user)
+    return (
+      <Link to="/auth" className="shrink-0 rounded-full bg-primary px-4 py-1.5 text-sm font-semibold text-primary-foreground">
+        Entrar
+      </Link>
+    );
+  return (
+    <div className="flex shrink-0 items-center gap-2">
+      {isAdmin && (
+        <Link to="/admin" className="hidden rounded-full border border-border px-3 py-1.5 text-sm sm:inline-block">
+          Painel
+        </Link>
+      )}
+      <Link to="/conta" aria-label="Minha conta" className="grid h-8 w-8 place-items-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+        {(user.email ?? "?")[0]!.toUpperCase()}
+      </Link>
+    </div>
   );
 }
