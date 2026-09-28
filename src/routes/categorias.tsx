@@ -14,7 +14,7 @@ export const Route = createFileRoute("/categorias")({
 });
 
 function Page() {
-  const { categories, byCat, creators, byCreator } = useCatalog();
+  const { categories, byCat } = useCatalog();
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <h1 className="mb-6 text-3xl font-extrabold">Categorias</h1>

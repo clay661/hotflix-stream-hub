@@ -1,11 +1,12 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { useState } from "react";
-import { getCat, byCat } from "@/lib/catalog";
+import { catalogQuery, useCatalog } from "@/lib/catalog";
 import { VideoGrid } from "@/components/video-card";
 
 export const Route = createFileRoute("/categoria/$slug")({
-  loader: ({ params }) => {
-    const cat = getCat(params.slug);
+  loader: async ({ params, context }) => {
+    const data = await context.queryClient.ensureQueryData(catalogQuery);
+    const cat = data.categories.find((c) => c.slug === params.slug);
     if (!cat) throw notFound();
     return { cat };
   },
@@ -24,6 +25,7 @@ export const Route = createFileRoute("/categoria/$slug")({
 
 function CatPage() {
   const { cat } = Route.useLoaderData();
+  const { byCat } = useCatalog();
   const [sort, setSort] = useState("relevantes");
   const items = [...byCat(cat.slug)].sort((a, b) =>
     sort === "vistos" ? b.views - a.views : sort === "recentes" ? b.publishedAt.localeCompare(a.publishedAt) : 0);
