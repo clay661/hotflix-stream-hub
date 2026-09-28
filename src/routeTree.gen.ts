@@ -21,6 +21,11 @@ import { Route as VideosRouteImport } from './routes/videos'
 import { Route as AuthenticatedContaRouteImport } from './routes/_authenticated/conta'
 import { Route as AdminIndexRouteImport } from './routes/admin.index'
 import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AdminCategoriasRouteImport } from './routes/admin.categorias'
+import { Route as AdminComentariosRouteImport } from './routes/admin.comentarios'
+import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
+import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
+import { Route as AdminVideosRouteImport } from './routes/admin.videos'
 import { Route as AdminEntrarRouteImport } from './routes/admin_.entrar'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
 import { Route as CriadorSlugRouteImport } from './routes/criador.$slug'
@@ -85,6 +90,31 @@ const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
   path: '/analytics',
   getParentRoute: () => AdminRoute,
 } as any)
+const AdminCategoriasRoute = AdminCategoriasRouteImport.update({
+  id: '/categorias',
+  path: '/categorias',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminComentariosRoute = AdminComentariosRouteImport.update({
+  id: '/comentarios',
+  path: '/comentarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminVideosRoute = AdminVideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => AdminRoute,
+} as any)
 const AdminEntrarRoute = AdminEntrarRouteImport.update({
   id: '/admin_/entrar',
   path: '/admin/entrar',
@@ -117,6 +147,11 @@ export interface FileRoutesByFullPath {
   '/videos': typeof VideosRoute
   '/conta': typeof AuthenticatedContaRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/comentarios': typeof AdminComentariosRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/admin/entrar': typeof AdminEntrarRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/criador/$slug': typeof CriadorSlugRoute
@@ -133,6 +168,11 @@ export interface FileRoutesByTo {
   '/videos': typeof VideosRoute
   '/conta': typeof AuthenticatedContaRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/comentarios': typeof AdminComentariosRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/admin/entrar': typeof AdminEntrarRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/criador/$slug': typeof CriadorSlugRoute
@@ -152,6 +192,11 @@ export interface FileRoutesById {
   '/videos': typeof VideosRoute
   '/_authenticated/conta': typeof AuthenticatedContaRoute
   '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/comentarios': typeof AdminComentariosRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/admin/videos': typeof AdminVideosRoute
   '/admin_/entrar': typeof AdminEntrarRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/criador/$slug': typeof CriadorSlugRoute
@@ -171,6 +216,11 @@ export interface FileRouteTypes {
     | '/videos'
     | '/conta'
     | '/admin/analytics'
+    | '/admin/categorias'
+    | '/admin/comentarios'
+    | '/admin/configuracoes'
+    | '/admin/usuarios'
+    | '/admin/videos'
     | '/admin/entrar'
     | '/categoria/$slug'
     | '/criador/$slug'
@@ -187,6 +237,11 @@ export interface FileRouteTypes {
     | '/videos'
     | '/conta'
     | '/admin/analytics'
+    | '/admin/categorias'
+    | '/admin/comentarios'
+    | '/admin/configuracoes'
+    | '/admin/usuarios'
+    | '/admin/videos'
     | '/admin/entrar'
     | '/categoria/$slug'
     | '/criador/$slug'
@@ -205,6 +260,11 @@ export interface FileRouteTypes {
     | '/videos'
     | '/_authenticated/conta'
     | '/admin/analytics'
+    | '/admin/categorias'
+    | '/admin/comentarios'
+    | '/admin/configuracoes'
+    | '/admin/usuarios'
+    | '/admin/videos'
     | '/admin_/entrar'
     | '/categoria/$slug'
     | '/criador/$slug'
@@ -314,6 +374,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminAnalyticsRouteImport
       parentRoute: typeof AdminRoute
     }
+    '/admin/categorias': {
+      id: '/admin/categorias'
+      path: '/categorias'
+      fullPath: '/admin/categorias'
+      preLoaderRoute: typeof AdminCategoriasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/comentarios': {
+      id: '/admin/comentarios'
+      path: '/comentarios'
+      fullPath: '/admin/comentarios'
+      preLoaderRoute: typeof AdminComentariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/configuracoes': {
+      id: '/admin/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/admin/configuracoes'
+      preLoaderRoute: typeof AdminConfiguracoesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/usuarios': {
+      id: '/admin/usuarios'
+      path: '/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AdminUsuariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/videos': {
+      id: '/admin/videos'
+      path: '/videos'
+      fullPath: '/admin/videos'
+      preLoaderRoute: typeof AdminVideosRouteImport
+      parentRoute: typeof AdminRoute
+    }
     '/admin_/entrar': {
       id: '/admin_/entrar'
       path: '/admin/entrar'
@@ -358,11 +453,21 @@ const AuthenticatedRouteRouteWithChildren =
 
 interface AdminRouteChildren {
   AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminCategoriasRoute: typeof AdminCategoriasRoute
+  AdminComentariosRoute: typeof AdminComentariosRoute
+  AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
+  AdminUsuariosRoute: typeof AdminUsuariosRoute
+  AdminVideosRoute: typeof AdminVideosRoute
   AdminIndexRoute: typeof AdminIndexRoute
 }
 
 const AdminRouteChildren: AdminRouteChildren = {
   AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminCategoriasRoute: AdminCategoriasRoute,
+  AdminComentariosRoute: AdminComentariosRoute,
+  AdminConfiguracoesRoute: AdminConfiguracoesRoute,
+  AdminUsuariosRoute: AdminUsuariosRoute,
+  AdminVideosRoute: AdminVideosRoute,
   AdminIndexRoute: AdminIndexRoute,
 }
 
