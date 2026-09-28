@@ -1,7 +1,8 @@
 import { Link } from "@tanstack/react-router";
-import { type Video, fmtDate, fmtViews, getCat } from "@/lib/catalog";
+import { type Video, fmtDate, fmtViews, useCatalog } from "@/lib/catalog";
 
 export function VideoCard({ v }: { v: Video }) {
+  const { getCat } = useCatalog();
   return (
     <Link to="/video/$slug" params={{ slug: v.slug }} className="group block min-w-0">
       <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">

@@ -1,12 +1,13 @@
 import { createFileRoute, notFound } from "@tanstack/react-router";
 import { BadgeCheck } from "lucide-react";
 import { useState } from "react";
-import { getCreator, byCreator, fmtViews } from "@/lib/catalog";
+import { catalogQuery, useCatalog, fmtViews } from "@/lib/catalog";
 import { Section, VideoGrid } from "@/components/video-card";
 
 export const Route = createFileRoute("/criador/$slug")({
-  loader: ({ params }) => {
-    const creator = getCreator(params.slug);
+  loader: async ({ params, context }) => {
+    const data = await context.queryClient.ensureQueryData(catalogQuery);
+    const creator = data.creators.find((c) => c.slug === params.slug);
     if (!creator) throw notFound();
     return { creator };
   },
@@ -26,6 +27,7 @@ export const Route = createFileRoute("/criador/$slug")({
 function CreatorPage() {
   const { creator: c } = Route.useLoaderData();
   const [following, setFollowing] = useState(false);
+  const { byCreator } = useCatalog();
   const vids = byCreator(c.slug);
   return (
     <>

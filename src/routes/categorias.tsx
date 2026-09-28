@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { categories, byCat } from "@/lib/catalog";
+import { catalogQuery, useCatalog } from "@/lib/catalog";
 
 export const Route = createFileRoute("/categorias")({
   head: () => ({ meta: [
@@ -8,7 +8,14 @@ export const Route = createFileRoute("/categorias")({
     { property: "og:title", content: "Categorias — Hotflix" },
     { property: "og:description", content: "Explore todas as categorias de vídeos." },
   ] }),
-  component: () => (
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQuery),
+  errorComponent: () => <p className="p-10 text-center">Não foi possível carregar os vídeos.</p>,
+  component: Page,
+});
+
+function Page() {
+  const { categories, byCat } = useCatalog();
+  return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <h1 className="mb-6 text-3xl font-extrabold">Categorias</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -23,5 +30,5 @@ export const Route = createFileRoute("/categorias")({
         ))}
       </div>
     </div>
-  ),
-});
+  );
+}

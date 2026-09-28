@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { Play } from "lucide-react";
-import { categories, creators, mostViewed, newest, videos, getCat, fmtViews } from "@/lib/catalog";
+import { catalogQuery, useCatalog, fmtViews } from "@/lib/catalog";
 import { Section, VideoGrid } from "@/components/video-card";
 
 export const Route = createFileRoute("/")({
@@ -12,11 +12,15 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: "Vídeos de viagens, esportes, música, tecnologia e mais." },
     ],
   }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQuery),
+  errorComponent: () => <p className="p-10 text-center">Não foi possível carregar os vídeos.</p>,
   component: Home,
 });
 
 function Home() {
-  const f = videos[0]!;
+  const { categories, creators, mostViewed, newest, videos, getCat } = useCatalog();
+  const f = mostViewed()[0];
+  if (!f) return <p className="p-10 text-center">Nenhum vídeo publicado ainda.</p>;
   const more = <Link to="/videos" className="text-sm text-primary">Ver todos</Link>;
   return (
     <>

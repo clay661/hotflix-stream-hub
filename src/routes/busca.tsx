@@ -1,7 +1,7 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { z } from "zod";
 import { Search } from "lucide-react";
-import { videos, creators, categories } from "@/lib/catalog";
+import { catalogQuery, useCatalog } from "@/lib/catalog";
 import { VideoGrid } from "@/components/video-card";
 
 export const Route = createFileRoute("/busca")({
@@ -12,6 +12,8 @@ export const Route = createFileRoute("/busca")({
     { property: "og:title", content: "Buscar — Hotflix" },
     { property: "og:description", content: "Busque vídeos, criadores e categorias." },
   ] }),
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQuery),
+  errorComponent: () => <p className="p-10 text-center">Não foi possível carregar os vídeos.</p>,
   component: SearchPage,
 });
 
@@ -20,6 +22,7 @@ const norm = (s: string) => s.normalize("NFD").replace(/[\u0300-\u036f]/g, "").t
 function SearchPage() {
   const { q } = Route.useSearch();
   const nav = useNavigate({ from: "/busca" });
+  const { videos, creators, categories } = useCatalog();
   const t = norm(q.trim());
   const vs = t ? videos.filter((v) => norm(v.title + v.tags.join(" ")).includes(t)) : [];
   const cs = t ? creators.filter((c) => norm(c.name).includes(t)) : [];

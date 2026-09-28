@@ -10,10 +10,23 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as BuscaRouteImport } from './routes/busca'
 import { Route as CategoriasRouteImport } from './routes/categorias'
 import { Route as CriadoresRouteImport } from './routes/criadores'
+import { Route as ResetPasswordRouteImport } from './routes/reset-password'
 import { Route as VideosRouteImport } from './routes/videos'
+import { Route as AuthenticatedContaRouteImport } from './routes/_authenticated/conta'
+import { Route as AdminIndexRouteImport } from './routes/admin.index'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
+import { Route as AdminCategoriasRouteImport } from './routes/admin.categorias'
+import { Route as AdminComentariosRouteImport } from './routes/admin.comentarios'
+import { Route as AdminConfiguracoesRouteImport } from './routes/admin.configuracoes'
+import { Route as AdminUsuariosRouteImport } from './routes/admin.usuarios'
+import { Route as AdminVideosRouteImport } from './routes/admin.videos'
+import { Route as AdminEntrarRouteImport } from './routes/admin_.entrar'
 import { Route as CategoriaSlugRouteImport } from './routes/categoria.$slug'
 import { Route as CriadorSlugRouteImport } from './routes/criador.$slug'
 import { Route as VideoSlugRouteImport } from './routes/video.$slug'
@@ -21,6 +34,20 @@ import { Route as VideoSlugRouteImport } from './routes/video.$slug'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BuscaRoute = BuscaRouteImport.update({
@@ -38,9 +65,59 @@ const CriadoresRoute = CriadoresRouteImport.update({
   path: '/criadores',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResetPasswordRoute = ResetPasswordRouteImport.update({
+  id: '/reset-password',
+  path: '/reset-password',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VideosRoute = VideosRouteImport.update({
   id: '/videos',
   path: '/videos',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedContaRoute = AuthenticatedContaRouteImport.update({
+  id: '/conta',
+  path: '/conta',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AdminIndexRoute = AdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminCategoriasRoute = AdminCategoriasRouteImport.update({
+  id: '/categorias',
+  path: '/categorias',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminComentariosRoute = AdminComentariosRouteImport.update({
+  id: '/comentarios',
+  path: '/comentarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminConfiguracoesRoute = AdminConfiguracoesRouteImport.update({
+  id: '/configuracoes',
+  path: '/configuracoes',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminUsuariosRoute = AdminUsuariosRouteImport.update({
+  id: '/usuarios',
+  path: '/usuarios',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminVideosRoute = AdminVideosRouteImport.update({
+  id: '/videos',
+  path: '/videos',
+  getParentRoute: () => AdminRoute,
+} as any)
+const AdminEntrarRoute = AdminEntrarRouteImport.update({
+  id: '/admin_/entrar',
+  path: '/admin/entrar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CategoriaSlugRoute = CategoriaSlugRouteImport.update({
@@ -61,74 +138,151 @@ const VideoSlugRoute = VideoSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/busca': typeof BuscaRoute
   '/categorias': typeof CategoriasRoute
   '/criadores': typeof CriadoresRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
+  '/conta': typeof AuthenticatedContaRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/comentarios': typeof AdminComentariosRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/admin/videos': typeof AdminVideosRoute
+  '/admin/entrar': typeof AdminEntrarRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/criador/$slug': typeof CriadorSlugRoute
   '/video/$slug': typeof VideoSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
   '/busca': typeof BuscaRoute
   '/categorias': typeof CategoriasRoute
   '/criadores': typeof CriadoresRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
+  '/conta': typeof AuthenticatedContaRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/comentarios': typeof AdminComentariosRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/admin/videos': typeof AdminVideosRoute
+  '/admin/entrar': typeof AdminEntrarRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/criador/$slug': typeof CriadorSlugRoute
   '/video/$slug': typeof VideoSlugRoute
+  '/admin': typeof AdminIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/admin': typeof AdminRouteWithChildren
+  '/auth': typeof AuthRoute
   '/busca': typeof BuscaRoute
   '/categorias': typeof CategoriasRoute
   '/criadores': typeof CriadoresRoute
+  '/reset-password': typeof ResetPasswordRoute
   '/videos': typeof VideosRoute
+  '/_authenticated/conta': typeof AuthenticatedContaRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/categorias': typeof AdminCategoriasRoute
+  '/admin/comentarios': typeof AdminComentariosRoute
+  '/admin/configuracoes': typeof AdminConfiguracoesRoute
+  '/admin/usuarios': typeof AdminUsuariosRoute
+  '/admin/videos': typeof AdminVideosRoute
+  '/admin_/entrar': typeof AdminEntrarRoute
   '/categoria/$slug': typeof CategoriaSlugRoute
   '/criador/$slug': typeof CriadorSlugRoute
   '/video/$slug': typeof VideoSlugRoute
+  '/admin/': typeof AdminIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
+    | '/auth'
     | '/busca'
     | '/categorias'
     | '/criadores'
+    | '/reset-password'
     | '/videos'
+    | '/conta'
+    | '/admin/analytics'
+    | '/admin/categorias'
+    | '/admin/comentarios'
+    | '/admin/configuracoes'
+    | '/admin/usuarios'
+    | '/admin/videos'
+    | '/admin/entrar'
     | '/categoria/$slug'
     | '/criador/$slug'
     | '/video/$slug'
+    | '/admin/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/auth'
     | '/busca'
     | '/categorias'
     | '/criadores'
+    | '/reset-password'
     | '/videos'
+    | '/conta'
+    | '/admin/analytics'
+    | '/admin/categorias'
+    | '/admin/comentarios'
+    | '/admin/configuracoes'
+    | '/admin/usuarios'
+    | '/admin/videos'
+    | '/admin/entrar'
     | '/categoria/$slug'
     | '/criador/$slug'
     | '/video/$slug'
+    | '/admin'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
+    | '/admin'
+    | '/auth'
     | '/busca'
     | '/categorias'
     | '/criadores'
+    | '/reset-password'
     | '/videos'
+    | '/_authenticated/conta'
+    | '/admin/analytics'
+    | '/admin/categorias'
+    | '/admin/comentarios'
+    | '/admin/configuracoes'
+    | '/admin/usuarios'
+    | '/admin/videos'
+    | '/admin_/entrar'
     | '/categoria/$slug'
     | '/criador/$slug'
     | '/video/$slug'
+    | '/admin/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AdminRoute: typeof AdminRouteWithChildren
+  AuthRoute: typeof AuthRoute
   BuscaRoute: typeof BuscaRoute
   CategoriasRoute: typeof CategoriasRoute
   CriadoresRoute: typeof CriadoresRoute
+  ResetPasswordRoute: typeof ResetPasswordRoute
   VideosRoute: typeof VideosRoute
+  AdminEntrarRoute: typeof AdminEntrarRoute
   CategoriaSlugRoute: typeof CategoriaSlugRoute
   CriadorSlugRoute: typeof CriadorSlugRoute
   VideoSlugRoute: typeof VideoSlugRoute
@@ -141,6 +295,27 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/busca': {
@@ -164,11 +339,81 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CriadoresRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reset-password': {
+      id: '/reset-password'
+      path: '/reset-password'
+      fullPath: '/reset-password'
+      preLoaderRoute: typeof ResetPasswordRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/videos': {
       id: '/videos'
       path: '/videos'
       fullPath: '/videos'
       preLoaderRoute: typeof VideosRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/conta': {
+      id: '/_authenticated/conta'
+      path: '/conta'
+      fullPath: '/conta'
+      preLoaderRoute: typeof AuthenticatedContaRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/admin/': {
+      id: '/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AdminIndexRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/categorias': {
+      id: '/admin/categorias'
+      path: '/categorias'
+      fullPath: '/admin/categorias'
+      preLoaderRoute: typeof AdminCategoriasRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/comentarios': {
+      id: '/admin/comentarios'
+      path: '/comentarios'
+      fullPath: '/admin/comentarios'
+      preLoaderRoute: typeof AdminComentariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/configuracoes': {
+      id: '/admin/configuracoes'
+      path: '/configuracoes'
+      fullPath: '/admin/configuracoes'
+      preLoaderRoute: typeof AdminConfiguracoesRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/usuarios': {
+      id: '/admin/usuarios'
+      path: '/usuarios'
+      fullPath: '/admin/usuarios'
+      preLoaderRoute: typeof AdminUsuariosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin/videos': {
+      id: '/admin/videos'
+      path: '/videos'
+      fullPath: '/admin/videos'
+      preLoaderRoute: typeof AdminVideosRouteImport
+      parentRoute: typeof AdminRoute
+    }
+    '/admin_/entrar': {
+      id: '/admin_/entrar'
+      path: '/admin/entrar'
+      fullPath: '/admin/entrar'
+      preLoaderRoute: typeof AdminEntrarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/categoria/$slug': {
@@ -195,12 +440,50 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedContaRoute: typeof AuthenticatedContaRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedContaRoute: AuthenticatedContaRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
+interface AdminRouteChildren {
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminCategoriasRoute: typeof AdminCategoriasRoute
+  AdminComentariosRoute: typeof AdminComentariosRoute
+  AdminConfiguracoesRoute: typeof AdminConfiguracoesRoute
+  AdminUsuariosRoute: typeof AdminUsuariosRoute
+  AdminVideosRoute: typeof AdminVideosRoute
+  AdminIndexRoute: typeof AdminIndexRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminCategoriasRoute: AdminCategoriasRoute,
+  AdminComentariosRoute: AdminComentariosRoute,
+  AdminConfiguracoesRoute: AdminConfiguracoesRoute,
+  AdminUsuariosRoute: AdminUsuariosRoute,
+  AdminVideosRoute: AdminVideosRoute,
+  AdminIndexRoute: AdminIndexRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AdminRoute: AdminRouteWithChildren,
+  AuthRoute: AuthRoute,
   BuscaRoute: BuscaRoute,
   CategoriasRoute: CategoriasRoute,
   CriadoresRoute: CriadoresRoute,
+  ResetPasswordRoute: ResetPasswordRoute,
   VideosRoute: VideosRoute,
+  AdminEntrarRoute: AdminEntrarRoute,
   CategoriaSlugRoute: CategoriaSlugRoute,
   CriadorSlugRoute: CriadorSlugRoute,
   VideoSlugRoute: VideoSlugRoute,
