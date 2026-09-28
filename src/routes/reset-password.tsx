@@ -2,7 +2,7 @@ import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { inputCls, primaryBtn } from "./auth";
+import { inputCls, primaryBtn } from "@/lib/ui-classes";
 
 export const Route = createFileRoute("/reset-password")({
   head: () => ({

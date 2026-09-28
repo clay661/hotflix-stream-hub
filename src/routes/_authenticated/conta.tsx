@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/use-auth";
-import { inputCls } from "../auth";
+import { inputCls } from "@/lib/ui-classes";
 
 export const Route = createFileRoute("/_authenticated/conta")({
   head: () => ({

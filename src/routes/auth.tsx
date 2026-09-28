@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { lovable } from "@/integrations/lovable/index";
 import { useAuth } from "@/hooks/use-auth";
+import { inputCls, primaryBtn } from "@/lib/ui-classes";
 
 export const Route = createFileRoute("/auth")({
   head: () => ({
@@ -19,8 +20,6 @@ export const Route = createFileRoute("/auth")({
 
 type Mode = "login" | "signup" | "forgot";
 
-export const inputCls = "w-full rounded-xl border border-border bg-secondary px-4 py-3 text-sm outline-none focus:border-primary";
-export const primaryBtn = "w-full rounded-xl bg-primary py-3 font-semibold text-primary-foreground disabled:opacity-60";
 
 function AuthPage() {
   const [mode, setMode] = useState<Mode>("login");
