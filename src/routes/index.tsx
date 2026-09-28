@@ -16,7 +16,7 @@ export const Route = createFileRoute("/")({
 });
 
 function Home() {
-  const f = videos[0];
+  const f = videos[0]!;
   const more = <Link to="/videos" className="text-sm text-primary">Ver todos</Link>;
   return (
     <>

@@ -27,7 +27,7 @@ export function SiteHeader() {
         <Logo />
         <nav className="hidden gap-5 text-sm text-muted-foreground lg:flex">
           {links.map((l) => (
-            <Link key={l.label} to={l.to} search={"search" in l ? l.search : undefined} className="hover:text-foreground" activeOptions={{ exact: true, includeSearch: true }} activeProps={{ className: "text-foreground font-semibold" }}>
+            <Link key={l.label} to={l.to} search={("search" in l ? l.search : {}) as never} className="hover:text-foreground" activeOptions={{ exact: true, includeSearch: true }} activeProps={{ className: "text-foreground font-semibold" }}>
               {l.label}
             </Link>
           ))}
