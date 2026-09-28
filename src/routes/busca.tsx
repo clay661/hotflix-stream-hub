@@ -32,7 +32,7 @@ function SearchPage() {
       </label>
       {!t && (
         <div className="mt-6 flex flex-wrap gap-2">
-          {["viagem", "treino", "música", "review", "receita"].map((s) => (
+          {["viagens", "treino", "música", "review", "cozinha"].map((s) => (
             <button key={s} onClick={() => nav({ search: { q: s } })} className="rounded-full border border-border px-4 py-1.5 text-sm">{s}</button>
           ))}
         </div>
