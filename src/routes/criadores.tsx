@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { BadgeCheck } from "lucide-react";
-import { creators, byCreator } from "@/lib/catalog";
+import { catalogQuery, useCatalog } from "@/lib/catalog";
 
 export const Route = createFileRoute("/criadores")({
   head: () => ({ meta: [
@@ -9,7 +9,14 @@ export const Route = createFileRoute("/criadores")({
     { property: "og:title", content: "Criadores — Hotflix" },
     { property: "og:description", content: "Conheça os criadores de conteúdo." },
   ] }),
-  component: () => (
+  loader: ({ context }) => context.queryClient.ensureQueryData(catalogQuery),
+  errorComponent: () => <p className="p-10 text-center">Não foi possível carregar os vídeos.</p>,
+  component: Page,
+});
+
+function Page() {
+  const { categories, byCat, creators, byCreator } = useCatalog();
+  return (
     <div className="mx-auto max-w-7xl px-4 py-8">
       <h1 className="mb-6 text-3xl font-extrabold">Criadores</h1>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -25,5 +32,5 @@ export const Route = createFileRoute("/criadores")({
         ))}
       </div>
     </div>
-  ),
-});
+  );
+}
