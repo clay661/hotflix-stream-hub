@@ -5,11 +5,15 @@ import {
   createRootRouteWithContext,
   useRouter,
   HeadContent,
+  useRouterState,
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
 
 import { SiteHeader, BottomNav } from "@/components/site-chrome";
+import { AuthProvider } from "@/hooks/use-auth";
+import { Toaster } from "@/components/ui/sonner";
+import { trackPageView } from "@/lib/tracking";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
@@ -123,9 +127,25 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+      <AuthProvider>
+        <AppFrame />
+        <Toaster theme="dark" richColors />
+      </AuthProvider>
+    </QueryClientProvider>
+  );
+}
+
+function AppFrame() {
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+  useEffect(() => {
+    trackPageView(pathname);
+  }, [pathname]);
+  if (pathname.startsWith("/admin")) return <Outlet />;
+  return (
+    <>
       <SiteHeader />
       <main className="min-h-screen pb-20 md:pb-0"><Outlet /></main>
       <BottomNav />
-    </QueryClientProvider>
+    </>
   );
 }
