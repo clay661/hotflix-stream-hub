@@ -23,9 +23,9 @@ export function trackPageView(path: string) {
       if (host !== location.hostname) ref = host;
     }
   } catch {}
-  void supabase.rpc("track_page_view", { _path: path, _session: sessionId(), _device: device(), _referrer: ref });
+  void supabase.rpc("track_page_view", { _path: path, _session: sessionId(), _device: device(), _referrer: ref }).then(() => {});
 }
 
 export function trackVideoView(videoId: string) {
-  void supabase.rpc("track_video_view", { _video: videoId, _session: sessionId() });
+  void supabase.rpc("track_video_view", { _video: videoId, _session: sessionId() }).then(() => {});
 }
